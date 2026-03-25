@@ -1,0 +1,96 @@
+ 
+
+1
+Display all the Suppliers with the same Status as the supplier, ‘CLARK’.
+
+select sname from supplier where status=(select status from supplier where sname='Smith');
++-------+
+| sname |
++-------+
+| Smith |
++-------+
+
+2
+Display all the Parts which have more Weight than all the Red parts.   
+
+select pname from parts where weight > (select weight from parts where color='Red');
++--------+
+| pname  |
++--------+
+| Bolt   |
+| Screw  |
+| Hammer |
++--------+
+
+3
+Display all the Projects going on in the same city as the project ‘TAPE’
+
+select jname from projects where city = ( select city from projects where jname='OCR');
++-------+
+| jname |
++-------+
+| OCR   |
++-------+
+
+
+
+exercise 5
+
+4
+Display the Part name that is ‘Red’ is color, and the Quantity sold. 
+
+select pname, qty from parts join spj on parts.`P#`=spj.pno where color='Red';
++-------+------+
+| pname | qty  |
++-------+------+
+| Nut   | 200  |
++-------+------+
+
+5
+select qty,status from spj join supplier on spj.sno=supplier.`S#` where status=20;
++------+--------+
+| qty  | status |
++------+--------+
+| 200  | 20     |
++------+--------+
+
+exercise 6 
+
+
+6
+Display the name of the Supplier who has sold the maximum Quantity (in one 
+sale).  
+select sname from supplier join spj on  spj.sno=supplier.`S#` where qty=(select max(qty) from spj);
++--------+
+| sname  |
++--------+
+| Golden |
++--------+
+
+7
+Display the name of the Employee with the minimum Salary.  
+select ename from emp where sal=(select min(sal) from emp);
++-------+
+| ename |
++-------+
+| Kirun |
++-------+
+
+8
+Display the name of the Supplier who has sold the maximum overall Quantity (sum 
+of Sales).   
+select sname from supplier join spj on spj.sno=supplier.`S#` where qty=(select max(qty) from spj);
++--------+
+| sname  |
++--------+
+| Golden |
++--------+
+
+9
+Display the name of the Department with the maximum number of Employees. 
+select dname from dept where deptno=( select deptno from emp group by deptno order by count(*) desc limit 1);
++-------+
+| dname |
++-------+
+| TRN   |
++-------+
