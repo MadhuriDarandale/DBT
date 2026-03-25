@@ -1,0 +1,161 @@
+ 
+
+Write a query that produces all customers serviced by salespeople with a 
+commission above 12%. Output the customer’s name, the salesperson’s name, 
+and the salesperson’s rate of commission. 
+
+select customers.cname,salespeople.sname, salespeople.comm from salespeople join customers on  customers.snum=salespeople.snum where salespeople.comm>0.12;
++----------+--------+------+
+| cname    | sname  | comm |
++----------+--------+------+
+| Liu      | Serres | 0.13 |
+| Grass    | Serres | 0.13 |
+| Cisneros | Rifkin | 0.15 |
++----------+--------+------+
+
+
+
+Write a query that calculates the amount of the salesperson’s commission on each 
+order by a customer with a rating above 100. 
+
+select salespeople.comm,customers.cnum from salespeople join customers on salespeople.snum=customers.snum where customers.rating > 100;
++------+------+
+| comm | cnum |
++------+------+
+| 0.13 | 2004 |
+| 0.13 | 2003 |
+| 0.15 | 2008 |
+| 0.10 | 2002 |
++------+------+
+
+Write a query that produces all pairs of salespeople who are living in the same 
+city.  Exclude combinations of salespeople with themselves as well as duplicate 
+rows with the order reversed. 
+select a.sname,b.sname,a.city from salespeople a join salespeople b on a.city=b.city where a.snum<b.snum;
++-------+--------+--------+
+| sname | sname  | city   |
++-------+--------+--------+
+| Peel  | Motika | London |
++-------+--------+--------+
+
+
+
+select a.sname,b.sname,a.city from salespeople a join salespeople b on a.city=b.city where a.snum!=b.snum;
++--------+--------+--------+
+| sname  | sname  | city   |
++--------+--------+--------+
+| Motika | Peel   | London |
+| Peel   | Motika | London |
++--------+--------+--------+
+
+select a.sname,b.sname,a.city from salespeople a join salespeople b on a.city=b.city;
++---------+---------+-----------+
+| sname   | sname   | city      |
++---------+---------+-----------+
+| Motika  | Peel    | London    |
+| Peel    | Peel    | London    |
+| Serres  | Serres  | San Jose  |
+| Motika  | Motika  | London    |
+| Peel    | Motika  | London    |
+| Rifkin  | Rifkin  | Barcelona |
+| Axelrod | Axelrod | New York  |
++---------+---------+-----------+
+
+delimiter //
+create procedure abc()
+begin
+	declare a int;
+	declare b varchar(15);
+	declare c int;
+	declare d int;
+	declare x int default 0;
+	declare c1 cursor for select * from emp;
+	open c1;
+	while x < 5 do
+		fetch c1 into a, b, c, d;
+		/* processing, e.g. set hra = c*0.4, etc. */
+		insert into tempp values(a,b);
+		set x = x+1;
+	end while;
+	close c1;
+end; //
+delimiter ;
+
+delimiter //
+create procedure abc()
+begin
+	declare a int;
+	declare b varchar(15);
+	declare c int;
+	declare d int;
+	declare x int default 0;
+	declare y int;
+	declare c1 cursor for select * from emp;
+	select count(*) into y from emp;
+	open c1;
+	while x < y do
+		fetch c1 into a, b, c, d;
+		/* processing, e.g. set hra = c*0.4, etc. */
+		insert into tempp values(a,b);
+		set x = x+1;
+	end while;
+	close c1;
+end; //
+delimiter ;
+
+delimiter //
+create procedure abc()
+begin
+	declare a int;
+	declare b varchar(15);
+	declare c int;
+	declare d int;
+	declare y int default 0;
+	declare c1 cursor for select * from emp;
+	declare continue handler for not found set y = 1;
+	open c1;
+	cursor_c1_loop:loop
+		fetch c1 into a, b, c, d;
+		if y = 1 then
+			leave cursor_c1_loop;
+		end if;
+		/* processing, e.g. set hra = c*0.4, etc. */
+		insert into tempp values(a,b);
+	end loop cursor_c1_loop;
+	close c1;
+end; //
+delimiter ;
+
+
+1. MySQL - SQL - Exercises
+SQL_Exercise1 - SQL_Exercise6
+
+2. MySQL - SQL - Assignments
+SQL_Asgn1 - SQL_Asgn21
+
+3. SQL Practice Queries
+
+4. Database Interview Frequently Asked Queries
+
+5. MySQL - PL - Exercises
+MySQL_PL_Exercise1 - MySQL_PL_Exercise4
+
+Try out all the programs
+Attempt MySQL-PL-Exercises.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
