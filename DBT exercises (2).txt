@@ -1,0 +1,494 @@
+0DBT exercise 1
++------+--------+--------+---------+
+| S#   | Sname  | Status | City    |
++------+--------+--------+---------+
+| S1   | Smith  | 20     | London  |
+| S2   | Jones  | 10     | Paris   |
+| S3   | Blake  | 30     | Paris   |
+| S4   | Golden | 40     | Newyork |
++------+--------+--------+---------+
++------+--------+--------+--------+---------+
+| P#   | Pname  | Color  | Weight | City    |
++------+--------+--------+--------+---------+
+| P1   | Nut    | Red    |  12.00 | London  |
+| P2   | Bolt   | Green  |  17.00 | Paris   |
+| P3   | Screw  | Blue   |  14.00 | Oslo    |
+| P4   | Hammer | Orange |  20.00 | Germany |
++------+--------+--------+--------+---------+
++------+---------+---------+
+| J#   | Jname   | city    |
++------+---------+---------+
+| J1   | Sorter  | Paris   |
+| J2   | Dislpay | Rome    |
+| J3   | OCR     | Athens  |
+| J4   | Jack    | Germany |
++------+---------+---------+
+
+select * from spj;
++------+------+------+------+
+| SNO  | PNO  | JNO  | Qty  |
++------+------+------+------+
+| S1   | P1   | J1   | 200  |
+| S2   | P2   | J2   | 300  |
+| S3   | P3   | J3   | 400  |
+| S4   | P4   | J4   | 500  |
++------+------+------+------+
+
+
+select `S#` , sname from supplier ;
++------+--------+
+| S#   | sname  |
++------+--------+
+| S1   | Smith  |
+| S2   | Jones  |
+| S3   | Blake  |
+| S4   | Golden |
++------+--------+
+
+select pname,color from parts where city = "London";
++-------+-------+
+| pname | color |
++-------+-------+
+| Nut   | Red   |
++-------+-------
+
+ select status from supplier where city= "London";
++--------+
+| status |
++--------+
+| 20     |
++--------+
+
+ select status from supplier where city="Paris" or city="Athens";
++--------+
+| status |
++--------+
+| 10     |
+| 30     |
++--------+
+
+select jname from projects;
++---------+
+| jname   |
++---------+
+| Sorter  |
+| Dislpay |
+| OCR     |
+| Jack    |
++---------+
+
+select pname from parts where weight between 12 and 14;
++-------+
+| pname |
++-------+
+| Nut   |
+| Screw |
++-------+
+
+select sname from supplier where status>=20;
++--------+
+| sname  |
++--------+
+| Smith  |
+| Blake  |
+| Golden |
++--------+
+
+select sname from supplier where city!="London";
++--------+
+| sname  |
++--------+
+| Jones  |
+| Blake  |
+| Golden |
++--------+
+
+select city from supplier;
++---------+
+| city    |
++---------+
+| London  |
+| Paris   |
+| Paris   |
+| Newyork |
++---------+
+
+select pname, (weight*1000) as Grams, (weight * 1000000) as Milligrams, (weight/1000) as kilograms from parts;
++--------+----------+-------------+-----------+
+| pname  | Grams    | Milligrams  | kilograms |
++--------+----------+-------------+-----------+
+| Nut    | 12000.00 | 12000000.00 |  0.012000 |
+| Bolt   | 17000.00 | 17000000.00 |  0.017000 |
+| Screw  | 14000.00 | 14000000.00 |  0.014000 |
+| Hammer | 20000.00 | 20000000.00 |  0.020000 |
++--------+----------+-------------+-----------+
+
+select * from spj;
++------+------+------+------+
+| SNO  | PNO  | JNO  | Qty  |
++------+------+------+------+
+| S1   | P1   | J1   | 200  |
+| S2   | P2   | J2   | 300  |
+| S3   | P3   | J3   | 400  |
+| S4   | P4   | J4   | 500  |
++------+------+------+------+
+
+select city from supplier order by city desc;
++---------+
+| city    |
++---------+
+| Paris   |
+| Paris   |
+| Newyork |
+| London  |
++---------+
+
+Display the Part Table in the ascending order of CITY and within the city in 
+the descending order of Part names.  
+
+select * from parts order by city asc,pname desc;
++------+--------+--------+--------+---------+
+| P#   | Pname  | Color  | Weight | City    |
++------+--------+--------+--------+---------+
+| P4   | Hammer | Orange |  20.00 | Germany |
+| P1   | Nut    | Red    |  12.00 | London  |
+| P3   | Screw  | Blue   |  14.00 | Oslo    |
+| P2   | Bolt   | Green  |  17.00 | Paris   |
++------+--------+--------+--------+---------+
+
+Display the Part Table in the ascending order of CITY and within the city in 
+the ascending order of Part names.   
+
+
+ select * from parts order by city asc,pname asc;
++------+--------+--------+--------+---------+
+| P#   | Pname  | Color  | Weight | City    |
++------+--------+--------+--------+---------+
+| P4   | Hammer | Orange |  20.00 | Germany |
+| P1   | Nut    | Red    |  12.00 | London  |
+| P3   | Screw  | Blue   |  14.00 | Oslo    |
+| P2   | Bolt   | Green  |  17.00 | Paris   |
++------+--------+--------+--------+---------+
+
+
+ select * from supplier where status between 10 and 20;
++------+-------+--------+--------+
+| S#   | Sname | Status | City   |
++------+-------+--------+--------+
+| S1   | Smith | 20     | London |
+| S2   | Jones | 10     | Paris  |
++------+-------+--------+--------+
+
+
+select pname, weight from parts where weight not between 10 and 15;
++--------+--------+
+| pname  | weight |
++--------+--------+
+| Bolt   |  17.00 |
+| Hammer |  20.00 |
++--------+--------+
+
+select pname from parts where pname like 'S%';
++-------+
+| pname |
++-------+
+| Screw |
++-------+
+
+
+select sname from supplier where city like 'L%';
++-------+
+| sname |
++-------+
+| Smith |
++-------+
+
+select * from projects where jname like '__n%';
+Empty set (0.007 sec)
+
+
+Display initial letter capital.
+select concat(upper(left(sname,1)),lower(substring(sname,2))) from supplier;
++--------------------------------------------------------+
+| concat(upper(left(sname,1)),lower(substring(sname,2))) |
++--------------------------------------------------------+
+| Smith                                                  |
+| Jones                                                  |
+| Blake                                                  |
+| Golden                                                 |
++--------------------------------------------------------+
+
+ select upper(sname) from supplier;
++--------------+
+| upper(sname) |
++--------------+
+| SMITH        |
+| JONES        |
+| BLAKE        |
+| GOLDEN       |
++--------------+
+
+select lower(sname) from supplier;
++--------------+
+| lower(sname) |
++--------------+
+| smith        |
+| jones        |
+| blake        |
+| golden       |
++--------------+
+
+select lpad(sname,25,' ')from supplier;
++---------------------------+
+| lpad(sname,25,' ')        |
++---------------------------+
+|                     Smith |
+|                     Jones |
+|                     Blake |
+|                    Golden |
++---------------------------+
+
+select replace (sname, 'la','ro') from supplier;
++----------------------------+
+| replace (sname, 'la','ro') |
++----------------------------+
+| Smith                      |
+| Jones                      |
+| Broke                      |
+| Golden                     |
++----------------------------+
+
+select replace (replace( sname,'l','r'),'a','o') from supplier;
++-------------------------------------------+
+| replace (replace( sname,'l','r'),'a','o') |
++-------------------------------------------+
+| Smith                                     |
+| Jones                                     |
+| Broke                                     |
+| Gorden                                    |
++-------------------------------------------+
+
+select length(sname) from supplier;
++---------------+
+| length(sname) |
++---------------+
+|             5 |
+|             5 |
+|             5 |
+|             6 |
++---------------+
+
+select sname, length(sname) from supplier;
++--------+---------------+
+| sname  | length(sname) |
++--------+---------------+
+| Smith  |             5 |
+| Jones  |             5 |
+| Blake  |             5 |
+| Golden |             6 |
++--------+---------------+
+
+select * from supplier where soundex(sname)=soundex('bloke');
++------+-------+--------+-------+
+| S#   | Sname | Status | City  |
++------+-------+--------+-------+
+| S3   | Blake | 30     | Paris |
++------+-------+--------+-------+
+
+ select sname,status from supplier order by 2;
++--------+--------+
+| sname  | status |
++--------+--------+
+| Jones  | 10     |
+| Smith  | 20     |
+| Blake  | 30     |
+| Golden | 40     |
++--------+--------+
+
+select sname,status from supplier order by 1;
++--------+--------+
+| sname  | status |
++--------+--------+
+| Blake  | 30     |
+| Golden | 40     |
+| Jones  | 10     |
+| Smith  | 20     |
++--------+--------+
+
+select case status when 10 then 'Ten' when 20 then 'Twenty' when 30 then 'Thirty' when 40 then 'Fourty' else 'Unknown' end as spelled_number from supplier;
++----------------+
+| spelled_number |
++----------------+
+| Twenty         |
+| Ten            |
+| Thirty         |
+| Fourty         |
++----------------+
+
+select dayname(sysdate())from dual;
++--------------------+
+| dayname(sysdate()) |
++--------------------+
+| Monday             |
++--------------------+
+
+select min(status) from supplier;
++-------------+
+| min(status) |
++-------------+
+| 10          |
++-------------+
+
+select max(weight) from parts;
++-------------+
+| max(weight) |
++-------------+
+|       20.00 |
++-------------+
+
+select avg(weight) from parts;
++-------------+
+| avg(weight) |
++-------------+
+|   15.750000 |
++-------------+
+
+select sum(qty) from spj where `pno`='p1';
++----------+
+| sum(qty) |
++----------+
+|      200 |
++----------+
+
+ select pno ,sum(qty) from spj group by pno;
++------+----------+
+| pno  | sum(qty) |
++------+----------+
+| P1   |      200 |
+| P2   |      300 |
+| P3   |      400 |
+| P4   |      500 |
++------+----------+
+
+ select avg(qty) , pno from spj group by pno;
++----------+------+
+| avg(qty) | pno  |
++----------+------+
+|      200 | P1   |
+|      300 | P2   |
+|      400 | P3   |
+|      500 | P4   |
++----------+------+
+
+select status , count(status) from supplier group by status;
++--------+---------------+
+| status | count(status) |
++--------+---------------+
+| 20     |             1 |
+| 10     |             1 |
+| 30     |             1 |
+| 40     |             1 |
++--------+---------------+
+
+select city, count(jname) from projects group by city;
++---------+--------------+
+| city    | count(jname) |
++---------+--------------+
+| Paris   |            1 |
+| Rome    |            1 |
+| Athens  |            1 |
+| Germany |            1 |
++---------+--------------+
+
+select count(*) from projects;
++----------+
+| count(*) |
++----------+
+|        4 |
++----------+
+
+ select case  when status = 10 then 'Ten' when status=20 then 'Twenty' when status = 30 then 'Thirty' when status = 40 then 'Fourty' end as status , count(*) as count from supplier group by status order by min(status);
++--------+-------+
+| status | count |
++--------+-------+
+| Ten    |     1 |
+| Twenty |     1 |
+| Thirty |     1 |
+| Fourty |     1 |
++--------+-------+
+
+select pname,qty from parts,spj where parts.`P#`=spj.pno;
++--------+------+
+| pname  | qty  |
++--------+------+
+| Nut    | 200  |
+| Bolt   | 300  |
+| Screw  | 400  |
+| Hammer | 500  |
++--------+------+
+
+select jname,qty from projects,spj where projects.`J#`=spj.jno;
++---------+------+
+| jname   | qty  |
++---------+------+
+| Sorter  | 200  |
+| Dislpay | 300  |
+| OCR     | 400  |
+| Jack    | 500  |
++---------+------+
+
+
+ select supplier.sname,parts.pname,projects.jname, spj.qty from supplier join spj on supplier.`S#`=spj.sno join parts on parts.`P#`=spj.pno join projects on spj.jno=projects.`J#`;
++--------+--------+---------+------+
+| sname  | pname  | jname   | qty  |
++--------+--------+---------+------+
+| Smith  | Nut    | Sorter  | 200  |
+| Jones  | Bolt   | Dislpay | 300  |
+| Blake  | Screw  | OCR     | 400  |
+| Golden | Hammer | Jack    | 500  |
++--------+--------+---------+------+
+
+select supplier.sname,parts.pname,projects.jname, projects.city from supplier join spj on supplier.`S#`=spj.sno join parts on parts.`P#`=spj.pno join projects on spj.jno=projects.`J#`;
++--------+--------+---------+---------+
+| sname  | pname  | jname   | city    |
++--------+--------+---------+---------+
+| Smith  | Nut    | Sorter  | Paris   |
+| Jones  | Bolt   | Dislpay | Rome    |
+| Blake  | Screw  | OCR     | Athens  |
+| Golden | Hammer | Jack    | Germany |
++--------+--------+---------+---------+
+
+select parts.pname,spj.qty from parts join spj on parts.`P#`=spj.pno where parts.color='Red';
++-------+------+
+| pname | qty  |
++-------+------+
+| Nut   | 200  |
++-------+------+
+
+select spj.qty from supplier join spj on supplier.`S#`=spj.sno where supplier.status=20;
++------+
+| qty  |
++------+
+| 200  |
++------+
+
+select parts.pname, spj.qty from parts join spj on spj.pno=parts.`P#` where weight > 14;
++--------+------+
+| pname  | qty  |
++--------+------+
+| Bolt   | 300  |
+| Hammer | 500  |
++--------+------+
+
+select projects.jname, projects.city from projects join spj on projects.`J#`=spj.jno where qty> 500;
+Empty set (0.008 sec)
+
+ select parts.pname, spj.qty from parts join spj on parts.`P#`=spj.pno where weight <15;
++-------+------+
+| pname | qty  |
++-------+------+
+| Nut   | 200  |
+| Screw | 400  |
++-------+------+
+
+
