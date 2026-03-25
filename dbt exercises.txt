@@ -1,0 +1,32 @@
+https://github.com/
+
+https://github.com/
+
+
++------+--------+--------+--------+---------+
+| P#   | Pname  | Color  | Weight | City    |
++------+--------+--------+--------+---------+
+| P1   | Nut    | Red    |  12.00 | London  |
+| P2   | Bolt   | Green  |  17.00 | Paris   |
+| P3   | Screw  | Blue   |  14.00 | Oslo    |
+| P4   | Hammer | Orange |  20.00 | Germany |
++------+--------+--------+--------+---------+
+
+
++------+--------+--------+---------+
+| S#   | Sname  | Status | City    |
++------+--------+--------+---------+
+| S1   | Smith  | 20     | London  |
+| S2   | Jones  | 10     | Paris   |
+| S3   | Blake  | 30     | Paris   |
+| S4   | Golden | 40     | Newyork |
++------+--------+--------+---------+
+
++------+---------+---------+
+| J#   | Jname   | city    |
++------+---------+---------+
+| J1   | Sorter  | Paris   |
+| J2   | Dislpay | Rome    |
+| J3   | OCR     | Athens  |
+| J4   | Jack    | Germany |
++------+---------+---------+
